@@ -1,9 +1,10 @@
 #Loading the required libraries to be used
-library(readxl)
-library(tidyverse)
-library(lubridate)
-library(openxlsx)
+library(readxl) #to read the excel file
+library(tidyverse) #for cleaning and manipulation
+library(lubridate) #for handling date and time data
+library(openxlsx) #to save the cleaned data
 
+#Loading the Copy of Adults_register_for_AI_ competition dataset and resavig it as Adults_register_for_AI_competition
 Adults_register_for_AI_competition <- read_excel("Copy of Adults_register_for_AI_competition(59).xlsx", sheet = 2)
 head(Adults_register_for_AI_competition)
 View(Adults_register_for_AI_competition)
