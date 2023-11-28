@@ -10,18 +10,21 @@ head(Adults_register_for_AI_competition)
 View(Adults_register_for_AI_competition)
 
 #Data Cleaning
-# Check for missing values in all columns
+# Checking for missing values in all columns
 na_counts <- colSums(is.na(Adults_register_for_AI_competition))
-# Print the result
+# Printing the result f total missing values.
+# detected a total of 250 values missing
 print(na_counts)
+
 # Remove duplicate rows
 Adults_register_for_AI_competition <- distinct(Adults_register_for_AI_competition)
-# Print the result
+# Printing and viewing the result
+#39 duplicates were removed
 print(Adults_register_for_AI_competition)
 View(Adults_register_for_AI_competition)
 
 #Data wrangling
-#rename columns
+#renaming columns to shorten their names, and formatting all to small letters
 Adults_register_for_AI_competition <- Adults_register_for_AI_competition %>% 
   rename(adult_id = `adult/id`, 
          adult_ticket_no = `adult_ticket_order_number`, 
@@ -30,25 +33,25 @@ Adults_register_for_AI_competition <- Adults_register_for_AI_competition %>%
          adult_id_updated_date = `adult/updatedAt`,
          is_owner = `isOwner`) %>% 
   rename_with(tolower, everything())
+# Checking if columns have been renamed
 colnames(Adults_register_for_AI_competition)
 
-
-library(lubridate)
-# Assuming adult_id_date is in the format "2023-07-20T14:46:59.000Z"
+#Spliting the date and time in adult_id_date into two separate columns
 Adults_register_for_AI_competition <- Adults_register_for_AI_competition %>%
   mutate(adult_id_date = ymd_hms(adult_id_date),  # Parse the date-time column
           date = as.Date(adult_id_date),           # Extract the date
           time = format(adult_id_date, "%H:%M:%S"))  # Extract the time
-
-# Print the result
+# Viewing the dataset
 View(Adults_register_for_AI_competition)
 
+#Spliting the date and time in adult_id_updated_date into two separate columns
 Adults_register_for_AI_competition <- Adults_register_for_AI_competition %>%
   mutate(adult_id_updated_date = ymd_hms(adult_id_date),  # Parse the date-time column
          updated_date = as.Date(adult_id_date),           # Extract the date
          updated_time = format(adult_id_date, "%H:%M:%S"))  # Extract the time
+#Viewing the dataset
 View(Adults_register_for_AI_competition)
 
 
-# Write the data to an Excel file
+# Write the data to an Excel file and save
 write.xlsx(Adults_register_for_AI_competition, "Adults_register_cleaned_data.xlsx", rowNames = FALSE)
