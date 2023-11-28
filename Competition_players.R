@@ -53,4 +53,4 @@ competition_players <- competition_players %>%
 View(competition_players)
 
 # Writing the cleaned data to an Excel file and save
-write.xlsx(Adults_register_for_AI_competition, "Adults_register_cleaned_data.xlsx", rowNames = FALSE)
+write.xlsx(competition_players, "competition_players_cleaned_data.xlsx", rowNames = FALSE)
